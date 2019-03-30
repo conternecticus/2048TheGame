@@ -297,9 +297,9 @@ public class Game2048 extends JPanel {
         }
 
         if (isWon || isLost) {
-            g.setColor(new Color(187, 173, 160, 30));
+            g.setColor(new Color(0x333333));
             g.fillRect(0, 0, getWidth(), getHeight());
-            g.setColor(new Color(0x776E65));
+            g.setColor(new Color(0xdddddd));
             g.setFont(new Font(FONT_NAME, Font.BOLD, 48));
             if (isWon) {
                 g.drawString("Victory", 100, 300);

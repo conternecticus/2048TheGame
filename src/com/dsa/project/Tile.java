@@ -38,14 +38,14 @@ public class Tile {
             case 2:    return new Color(0x79c4b4);
             case 4:    return new Color(0x79b5c4);
             case 8:    return new Color(0x79a7c4);
-            case 16:   return new Color(0x798dc4);
-            case 32:   return new Color(0x797fc4);
-            case 64:   return new Color(0x8979c4);
+            case 16:   return new Color(0x7984c4);
+            case 32:   return new Color(0x9279c4);
+            case 64:   return new Color(0xa879c4);
             case 128:  return new Color(0x5addd2);
-            case 256:  return new Color(0x5ed69e);
-            case 512:  return new Color(0x5eacd6);
-            case 1024: return new Color(0x5e8ad6);
-            case 2048: return new Color(0x884bf2);
+            case 256:  return new Color(0x57c9db);
+            case 512:  return new Color(0x5e96d6);
+            case 1024: return new Color(0x6e5ed6);
+            case 2048: return new Color(0xaf57db);
         }
         return new Color(0x3a3a3a);
     }

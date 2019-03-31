@@ -74,7 +74,7 @@ public class Game2048 extends JPanel {
         boolean needAddTile = false;
         for (int i = 0; i < 4; i++) {
             Tile[] line = getLine(i);
-            Tile[] merged = mergeLine(moveLine(line));
+            Tile[] merged = mergeTile(moveLine(line));
             setLine(i, merged);
             if (!needAddTile && !compare(line, merged)) {
                 needAddTile = true;
@@ -202,23 +202,27 @@ public class Game2048 extends JPanel {
         }
     }
 
-    private Tile[] mergeLine(Tile[] oldLine) {
+    private Tile[] mergeTile(Tile[] oldTile) {
         LinkedList<Tile> list = new LinkedList<Tile>();
-        for (int i = 0; i < 4 && !oldLine[i].isEmpty(); i++) {
-            int num = oldLine[i].getValue();
-            if (i < 3 && oldLine[i].getValue() == oldLine[i + 1].getValue()) {
-                num *= 2;
-                myScore += num;
-                int ourTarget = 2048;
-                if (num == ourTarget) {
+        final int maxValue = 2048;
+
+        for (int i = 0; i < 4 && !(oldTile[i].isEmpty()); i++) {        // oldLine is NOT empty
+            int num = oldTile[i].getValue();                            // current value of current Tile
+            if ((i < 3) && (oldTile[i].getValue() == oldTile[i + 1].getValue())) {  //if current Tile and next Tile is equal
+                num *= 2;                       // num is now doubled
+                myScore += num;                 // update score
+
+                if (num == maxValue) {
                     isWon = true;
                 }
+
                 i++;
             }
             list.add(new Tile(num));
         }
+
         if (list.size() == 0) {
-            return oldLine;
+            return oldTile;
         } else {
             ensureSize(list, 4);
             return list.toArray(new Tile[4]);
@@ -264,18 +268,9 @@ public class Game2048 extends JPanel {
         int value = tile.getValue();
         int xOffset = offsetCoors(x);
         int yOffset = offsetCoors(y+1);
+
         g.setColor(tile.getBackground());
         g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
-        g.setColor(tile.getNumberColor());
-        final int size = value < 100 ? 36 : value < 1000 ? 32 : 24;
-        final Font font = new Font(FONT_NAME, Font.PLAIN, size);
-        g.setFont(font);
-
-        String s = String.valueOf(value);
-        final FontMetrics fm = getFontMetrics(font);
-
-        final int w = fm.stringWidth(s);
-        final int h = -(int) fm.getLineMetrics(s, g).getBaselineOffsets()[2];
 
         // draw 2048 box
         g.setColor(new Color(0x1D1D1D));                        //2048 box to anti-alias
@@ -289,35 +284,42 @@ public class Game2048 extends JPanel {
         // draw text in tiles
         g.setColor(new Color(0xeaeaea));
 
+        final int size = value <= 64 ? 60 : value <= 512 ? 50 : 40;
+        final Font font = new Font(FONT_NAME, Font.BOLD, size);
+        g.setFont(font);
+
+        String s = String.valueOf(value);
+        final FontMetrics fm = getFontMetrics(font);
+
+        //fm: sun.font.FontDesignMetrics[font=java.awt.Font[family=Arial,name=Arial,style=bold,size=60]ascent=56, descent=12, height=70]
+        final int w = fm.stringWidth(s);        // w = 34, Returns the total advance width for showing the specified String in this Font.
+                                                //          Advance width is the distance from the origin of the text
+                                                            // to the position of a subsequently rendered string.
+
+        final int h = -(int) fm.getLineMetrics(s, g).getBaselineOffsets()[2];   //h = 55
+        //Returns the baseline offsets of the text, relative to the baseline of the text.
+
         if(value != 0) {
-            if (value <= 8) {    //one-digit number
-                g.drawString(s, xOffset + (TILE_SIZE - w) / 2 - 5, yOffset + TILE_SIZE - (TILE_SIZE - h) / 2 + 3);
-            } else if (value <= 64) {   //two-digit number
-                g.drawString(s, xOffset + (TILE_SIZE - w) / 2 - 15, yOffset + TILE_SIZE - (TILE_SIZE - h) / 2 + 3);
-            } else if (value <= 512) {  //three-digit number
-                g.setFont(new Font(FONT_NAME, Font.BOLD, 50));
-                g.drawString(s, xOffset + (TILE_SIZE - w) / 2  - 17, yOffset + TILE_SIZE - (TILE_SIZE - h) / 2 + 4);
-            } else if (value <= 2048) { //four-digit number
-                g.setFont(new Font(FONT_NAME, Font.BOLD, 40));
-                g.drawString(s, xOffset + (TILE_SIZE - w) / 2 - 17, yOffset + TILE_SIZE - (TILE_SIZE - h) / 2 + 5);
-            }
+            g.drawString(s, xOffset + (TILE_SIZE - w) / 2, yOffset + TILE_SIZE - (TILE_SIZE - h) / 2 - 5);
         }
 
-        //draw message 
+        //draw message
         if (isWon || isLost) {
-            g.setColor(new Color(0x393939));
+            g.setColor(new Color(0x393939));                    //set game ending background color
             g.fillRect(0, 0, getWidth(), getHeight());
+
             g.setColor(new Color(0xdddddd));
+
+            g.setFont(new Font(FONT_NAME, Font.BOLD, 25));
+            g.drawString("Press Space to restart", 110, getHeight() - 40);
+
             g.setFont(new Font(FONT_NAME, Font.BOLD, 48));
+
             if (isWon) {
                 g.drawString("Victory!", 150, 310);
             }
             if (isLost) {
                 g.drawString("Game Over!", 105, 310);
-            }
-            if (isWon || isLost) {
-                g.setFont(new Font(FONT_NAME, Font.BOLD, 25));
-                g.drawString("Press Space to restart", 110, getHeight() - 40);
             }
         }
 
@@ -328,7 +330,6 @@ public class Game2048 extends JPanel {
         g.setColor(Color.BLACK);
         g.drawString("Score: " + myScore, 300, 50);
 
-
     }
 
     private static int offsetCoors(int arg) {
@@ -336,16 +337,16 @@ public class Game2048 extends JPanel {
     }
 
     public static void main(String[] args) {
-        JFrame window = new JFrame();
-        window.setTitle("2048 Game");
-        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        window.setSize(490, 700);
-        //game.pack();
-        window.setResizable(false);
+        JFrame game = new JFrame();
+        game.setTitle("2048 Clone");                // set title of game window
+        game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);   //exit problem when window is closed
+        game.setSize(490, 700);                             //set window size
 
-        window.add(new Game2048());
+        game.setResizable(false);                                       // cannot resize window
 
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
+        game.add(new Game2048());                                       // add new Game2048 object to JFrame
+
+        game.setLocationRelativeTo(null);                               // window appear in the middle of the screen
+        game.setVisible(true);                      // set visibility of window, program will stop if 'false'
     }
 }

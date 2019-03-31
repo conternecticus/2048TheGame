@@ -1,4 +1,4 @@
-package com.company;
+package com.dsa.project;
 
 import java.awt.*;
 

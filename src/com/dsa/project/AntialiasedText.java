@@ -1,10 +1,8 @@
-package com.company;
+package com.dsa.project;
 
 import javax.swing.*;
-import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.font.*;
 
 /**
  * This class demonstrates how to use Rendering Hints to antialias text.

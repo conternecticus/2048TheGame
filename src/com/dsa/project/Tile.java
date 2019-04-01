@@ -18,10 +18,6 @@ public class Tile {
     }
 
     public Color getNumberColor() {
-        if(value < 8) { // for 2, 4
-            return new Color(0xf9f6f2);
-        }
-        else
             return new Color(0xf9f6f2);
     }
 

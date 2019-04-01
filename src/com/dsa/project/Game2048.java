@@ -338,7 +338,7 @@ public class Game2048 extends JPanel {
 
     public static void main(String[] args) {
         JFrame game = new JFrame();
-        game.setTitle("2048 Clone");                // set title of game window
+        game.setTitle("2048 DSA IU");                // set title of game window
         game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);   //exit problem when window is closed
         game.setSize(490, 700);                             //set window size
 

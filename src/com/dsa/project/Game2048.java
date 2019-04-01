@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Game2048 extends JPanel {
-    private static final Color BG_COLOR = new Color(0x1D1D1D);
+    private static final Color BACKGROUND = new Color(0x1D1D1D);
     private static final String FONT_NAME = "Arial";
     private static final int TILE_SIZE = 100;
     private static final int TILES_MARGIN = 15;
@@ -20,22 +20,22 @@ public class Game2048 extends JPanel {
     private int myScore = 0;
 
     public Game2048() {
-        setPreferredSize(new Dimension(1000, 1000));
         setFocusable(true);
         addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    reset();
+            public void keyPressed(KeyEvent keyPressed) {
+                if (keyPressed.getKeyCode() == KeyEvent.VK_SPACE) {
+                    startGame();
                 }
                 if (!canMove()) {
                     isLost = true;
                 }
 
                 if (!isWon && !isLost) {
-                    switch (e.getKeyCode()) {
+                    switch (keyPressed.getKeyCode()) {
                         case KeyEvent.VK_LEFT:
                             left();
+
                             break;
                         case KeyEvent.VK_RIGHT:
                             right();
@@ -49,16 +49,13 @@ public class Game2048 extends JPanel {
                     }
                 }
 
-                if (!isWon && !canMove()) {
-                    isLost = true;
-                }
                 repaint();
             }
         });
-        reset();
+        startGame();
     }
 
-    public void reset() {
+    public void startGame() {
         myScore = 0;
         isWon = false;
         isLost = false;
@@ -72,9 +69,10 @@ public class Game2048 extends JPanel {
 
     public void left() {
         boolean needAddTile = false;
-        for (int i = 0; i < 4; i++) {
+
+        for (int i = 0; i < 4; i++) {       //move all 4 lines
             Tile[] line = getLine(i);
-            Tile[] merged = mergeLine(moveLine(line));
+            Tile[] merged = mergeLine(moveLine(line));      //merged line or moved
             setLine(i, merged);
             if (!needAddTile && !compare(line, merged)) {
                 needAddTile = true;
@@ -180,6 +178,7 @@ public class Game2048 extends JPanel {
                 int newX = (x * cos) - (y * sin) + offsetX;
                 int newY = (x * sin) + (y * cos) + offsetY;
                 newTiles[(newX) + (newY) * 4] = tileAt(x, y);
+
             }
         }
         return newTiles;
@@ -251,7 +250,7 @@ public class Game2048 extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.setColor(BG_COLOR);
+        g.setColor(BACKGROUND);
         g.fillRect(0, 0, this.getSize().width, this.getSize().height);
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
@@ -278,7 +277,7 @@ public class Game2048 extends JPanel {
         g.fillRect(20, 3, 150, 70);
 
         // draw 2048
-        g.setColor(new Color(0xBEBEBE));
+        g.setColor(new Color(0x79c4b4));
         g.setFont(new Font(FONT_NAME, Font.BOLD, 60));
         g.drawString("2048", 30, 65);
 
@@ -309,7 +308,7 @@ public class Game2048 extends JPanel {
             g.setColor(new Color(0x393939));                    //set game ending background color
             g.fillRect(0, 0, getWidth(), getHeight());
 
-            g.setColor(new Color(0xdddddd));
+            g.setColor(new Color(0x79c4b4));
 
             g.setFont(new Font(FONT_NAME, Font.BOLD, 25));
             g.drawString("Press Space to restart", 110, getHeight() - 40);
@@ -325,7 +324,7 @@ public class Game2048 extends JPanel {
         }
 
         //Score
-        g.setColor(new Color(0xBEBEBE));
+        g.setColor(new Color(0x79c4b4));
         g.fillRect(280, 25, 140, 40 );          //Score box
         g.setFont(new Font(FONT_NAME, Font.BOLD, 18));
         g.setColor(Color.BLACK);

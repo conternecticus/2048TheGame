@@ -111,7 +111,8 @@ public class Game2048 extends JPanel {
     private void addTile() {
         List<Tile> list = availableSpace();
         if (!availableSpace().isEmpty()) {
-            int index = (int) (Math.random() * list.size()) % list.size();
+            double randy = Math.random(); //a random number from 0.0 to 1.0, for debug purpose
+            int index = (int) (randy * list.size()) % list.size(); //create a random index to add a new tile
             Tile emptyTime = list.get(index);
             emptyTime.setValue(Math.random() < 0.7 ? 2 : 4);  //chance of spawning 4 is less than 2
         }

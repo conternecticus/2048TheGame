@@ -25,7 +25,7 @@ public class Game2048 extends JPanel {
             @Override
             public void keyPressed(KeyEvent keyPressed) {
                 if (keyPressed.getKeyCode() == KeyEvent.VK_SPACE) {
-                    startGame();
+                    reset();
                 }
                 if (!canMove()) {
                     isLost = true;
@@ -52,10 +52,10 @@ public class Game2048 extends JPanel {
                 repaint();
             }
         });
-        startGame();
+        reset();
     }
 
-    public void startGame() {
+    public void reset() {
         myScore = 0;
         isWon = false;
         isLost = false;

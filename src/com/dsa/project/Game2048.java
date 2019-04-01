@@ -74,7 +74,7 @@ public class Game2048 extends JPanel {
         boolean needAddTile = false;
         for (int i = 0; i < 4; i++) {
             Tile[] line = getLine(i);
-            Tile[] merged = mergeTile(moveLine(line));
+            Tile[] merged = mergeLine(moveLine(line));
             setLine(i, merged);
             if (!needAddTile && !compare(line, merged)) {
                 needAddTile = true;
@@ -184,7 +184,7 @@ public class Game2048 extends JPanel {
         return newTiles;
     }
 
-    private Tile[] moveLine(Tile[] oldLine) {
+    private Tile[] moveLine(Tile[] oldLine) { //This method makes all the tiles stack to one direction, not merge them.
         LinkedList<Tile> l = new LinkedList<Tile>();
         for (int i = 0; i < 4; i++) {
             if (!oldLine[i].isEmpty())
@@ -194,7 +194,7 @@ public class Game2048 extends JPanel {
             return oldLine;
         } else {
             Tile[] newLine = new Tile[4];
-            ensureSize(l, 4);
+            ensureSize(l, 4); //Ensure that the new stacked line must have 4 elements
             for (int i = 0; i < 4; i++) {
                 newLine[i] = l.removeFirst();
             }
@@ -202,7 +202,7 @@ public class Game2048 extends JPanel {
         }
     }
 
-    private Tile[] mergeTile(Tile[] oldTile) {
+    private Tile[] mergeLine(Tile[] oldTile) {
         LinkedList<Tile> list = new LinkedList<Tile>();
         final int maxValue = 2048;
 

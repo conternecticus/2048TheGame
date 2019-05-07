@@ -14,6 +14,9 @@ public class Game2048 extends JPanel {
     private static final int TILE_SIZE = 100;
     private static final int TILES_MARGIN = 15;
 
+    private static final int BOSSHEALTH = -5;
+    private static boolean isObstacleExist = false;
+
     private Tile[] GameTiles;
     private boolean isWon = false;
     private boolean isLost = false;
@@ -72,7 +75,7 @@ public class Game2048 extends JPanel {
 
         for (int i = 0; i < 4; i++) {       //move all 4 lines
             Tile[] line = getLine(i);
-            Tile[] merged = mergeLine(moveLine(line));      //merged line or moved
+            Tile[] merged = mergeLine(moveLine(line));      //merged line or moved if not merge-able
             setLine(i, merged);
             if (!needAddTile && !compare(line, merged)) {
                 needAddTile = true;
@@ -82,6 +85,10 @@ public class Game2048 extends JPanel {
         if (needAddTile) {
             addTile();
         }
+
+        killObstacle();
+        addObstacle();
+
     }
 
     public void right() {
@@ -113,6 +120,39 @@ public class Game2048 extends JPanel {
             int index = (int) (randy * list.size()) % list.size(); //create a random index to add a new tile
             Tile emptyTime = list.get(index);
             emptyTime.setValue(Math.random() < 0.7 ? 2 : 4);  //chance of spawning 4 is less than 2
+        }
+    }
+
+    private void addObstacle() {
+        //if obstacle is already there
+        if(isObstacleExist)
+            return;
+//        for (int i = 0; i < 16; i++) {
+//            if (GameTiles[i].getValue() < 0)
+//                return;
+//        }
+        int random = (int) (Math.random() * 10 + 1);
+        if (random <= 3) {
+            List<Tile> list = availableSpace();
+            if (!availableSpace().isEmpty()) {
+                double randy = Math.random(); //a random number from 0.0 to 1.0, for debug purpose
+                int index = (int) (randy * list.size()) % list.size(); //create a random index to add a new tile
+                Tile emptyTime = list.get(index);
+                emptyTime.setValue(BOSSHEALTH);
+            }
+            isObstacleExist = true;
+        }
+    }
+
+    private void killObstacle() {
+        if(isObstacleExist) {
+            for (int i = 0; i < 16; i++) {
+                if (GameTiles[i].getValue() < 0) {
+                    GameTiles[i].setValue(GameTiles[i].getValue() + 1);
+                    if(GameTiles[i].getValue() == 0)
+                        isObstacleExist = false;
+                }
+            }
         }
     }
 
@@ -293,8 +333,8 @@ public class Game2048 extends JPanel {
 
         //fm: sun.font.FontDesignMetrics[font=java.awt.Font[family=Arial,name=Arial,style=bold,size=60]ascent=56, descent=12, height=70]
         final int w = fm.stringWidth(s);        // w = 34, Returns the total advance width for showing the specified String in this Font.
-                                                //          Advance width is the distance from the origin of the text
-                                                            // to the position of a subsequently rendered string.
+        //          Advance width is the distance from the origin of the text
+        // to the position of a subsequently rendered string.
 
         final int h = -(int) fm.getLineMetrics(s, g).getBaselineOffsets()[2];   //h = 55
         //Returns the baseline offsets of the text, relative to the baseline of the text.

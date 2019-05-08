@@ -14,7 +14,10 @@ public class Tile {
     }
 
     public boolean isEmpty() {
-        return (value == 0);
+        if(value==0)
+            return true;
+        else
+            return false;
     }
 
     public Color getNumberColor() {
@@ -25,12 +28,15 @@ public class Tile {
         this.value = value;
     }
 
+    public void deleteValue(){value = 0;}
+
     public int getValue() {
         return value;
     }
 
     public Color getBackground() {
         switch (value) {
+            case -1:   return new Color(0x3a3a3a);
             case 2:    return new Color(0x79c4b4);
             case 4:    return new Color(0x79b5c4);
             case 8:    return new Color(0x79a7c4);

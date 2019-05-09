@@ -25,7 +25,7 @@ public class Game2048 extends JPanel {
     private boolean isWon = false;
     private boolean isLost = false;
     private int myScore = 0;
-    private Image image = ImageIO.read(new File("Obstacle.png"));;
+    private Image image = ImageIO.read(new File("Cone.png"));;
 
 
     public Game2048() throws IOException {

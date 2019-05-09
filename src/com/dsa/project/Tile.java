@@ -36,7 +36,7 @@ public class Tile {
 
     public Color getBackground() {
         switch (value) {
-            case -1:   return new Color(0x3a3a3a);
+            case -1:   return new Color(0x3a3a3a); //obstacle
             case 2:    return new Color(0x79c4b4);
             case 4:    return new Color(0x79b5c4);
             case 8:    return new Color(0x79a7c4);

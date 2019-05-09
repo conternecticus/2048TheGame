@@ -227,7 +227,7 @@ public class Game2048 extends JPanel {
                     newLine[i]=list.remove();
             }
         }
-        else{                                               // when there's an obstacle
+        else{                                               // Obstacle
             if(oldTile[1].getValue()==-1){                  // if the obstacle is in index 1, then we just need to merge the two Tiles to the right of the obstacle
                 if(oldTile[2].getValue()==oldTile[3].getValue()){   // do the merging for the two last tiles to the right of the obstacle
                     int num = oldTile[2].getValue();
@@ -248,7 +248,7 @@ public class Game2048 extends JPanel {
                     newLine[3] = list.remove();
                 }
             }
-            if(oldTile[2].getValue()==-1){
+            if(oldTile[2].getValue()==-1){    // obstacle is in index 2
                 if(oldTile[0].getValue()==oldTile[1].getValue()){
                     int num = oldTile[1].getValue();
                     num *=2;
@@ -268,7 +268,7 @@ public class Game2048 extends JPanel {
                     newLine[3] = oldTile[3];
                 }
             }
-            if(oldTile[0].getValue()==-1){
+            if(oldTile[0].getValue()==-1){    //obstacle in index 0
                 for(int i=1; i<4 && !oldTile[i].isEmpty();i++){
                     int num = oldTile[i].getValue();                            // current value of current Tile
                     if ((i < 3) && (oldTile[i].getValue() == oldTile[i + 1].getValue())) {  //if current Tile and next Tile is equal
@@ -292,7 +292,7 @@ public class Game2048 extends JPanel {
                         newLine[i]=list.remove();
                 }
             }
-            if(oldTile[3].getValue()==-1){
+            if(oldTile[3].getValue()==-1){      // obstacle in index 3
                 for(int i=0; i<3 && !oldTile[i].isEmpty();i++){
                     int num = oldTile[i].getValue();                            // current value of current Tile
                     if ((i < 2) && (oldTile[i].getValue() == oldTile[i + 1].getValue())) {  //if current Tile and next Tile is equal
@@ -482,10 +482,10 @@ public class Game2048 extends JPanel {
                 return false;
             }
         };
-        if(value == -1){
+        if(value == -1){ //apply image for object -1
             g.setColor(tile.getBackground());
             g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
-            g.drawImage(image, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);
+            g.drawImage(image, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);//draw
         }
         else {
 

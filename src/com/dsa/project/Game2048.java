@@ -33,8 +33,10 @@ public class Game2048 extends JPanel {
         addKeyListener(new KeyAdapter() {   //KeyAdapter is an object that registered to receive events by using addKeyListener method
             @Override
             public void keyPressed(KeyEvent keyPressed) {   //An object of class KeyEvent is passed to the KeyAdapter so KeyAdapter can handle with keyboard events
-                if (keyPressed.getKeyCode() == KeyEvent.VK_SPACE) {     //Reset the game when players press SPACE
-                    reset();
+                if(keyPressed.getKeyCode() == KeyEvent.VK_A ||
+                        keyPressed.getKeyCode() == KeyEvent.VK_B ||
+                        keyPressed.getKeyCode() == KeyEvent.VK_C) {
+                    startGame(keyPressed.getKeyCode());
                 }
                 if (!canMove()) {
                     isLost = true;
@@ -44,7 +46,6 @@ public class Game2048 extends JPanel {
                     switch (keyPressed.getKeyCode()) {
                         case KeyEvent.VK_LEFT:
                             left();
-
                             break;
                         case KeyEvent.VK_RIGHT:
                             right();
@@ -60,10 +61,10 @@ public class Game2048 extends JPanel {
                 repaint();      //To refresh the viewing area when wanting the game to be reset
             }   //End of overridden keyPress method
         });
-        reset();    //To really reset the game
+        startGame(65);  //Start game in Normal Mode
     }
 
-    public void reset() {
+    public void startGame(int keyEventCode) {
         myScore = 0;
         isWon = false;
         isLost = false;
@@ -73,7 +74,40 @@ public class Game2048 extends JPanel {
         }
         addTile();  //spawn 2 random tiles
         addTile();
-        addObstacle();
+        if (keyEventCode == KeyEvent.VK_B)  //if user press B, play with Obstacle
+            playWithMovableObstacle = true;
+        if (keyEventCode == KeyEvent.VK_A)
+            playWithMovableObstacle = false;
+    }
+    
+    private void addObstacleMovable() {
+        //if obstacle is already there
+        if(isObstacleExist)
+            return;
+
+        int random = (int) (Math.random() * 10 + 1);
+        if (random <= 3) {
+            List<Tile> list = availableSpace();
+            if (!availableSpace().isEmpty()) {
+                double randy = Math.random(); //a random number from 0.0 to 1.0, for debug purpose
+                int index = (int) (randy * list.size()) % list.size(); //create a random index to add a new tile
+                Tile emptyTime = list.get(index);
+                emptyTime.setValue(BOSSHEALTH);
+            }
+            isObstacleExist = true;
+        }
+    }
+
+    private void killObstacle() {
+        if(isObstacleExist) {
+            for (int i = 0; i < 16; i++) {
+                if (GameTiles[i].getValue() < 0) {
+                    GameTiles[i].setValue(GameTiles[i].getValue() + 1);
+                    if(GameTiles[i].getValue() == 0)
+                        isObstacleExist = false;
+                }
+            }
+        }
     }
 
     public void left() {
@@ -91,6 +125,8 @@ public class Game2048 extends JPanel {
         if (needAddTile) {
             addTile();
         }
+        if(playWithMovableObstacle)         // if player use to play with Movable Obstacle
+            addObstacleMovable();
 
     }
 

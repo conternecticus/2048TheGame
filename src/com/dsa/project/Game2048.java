@@ -110,7 +110,7 @@ public class Game2048 extends JPanel {
         }
     }
 
-    public void left() {
+public void left() {
         boolean needAddTile = false;
 
         for (int i = 0; i < 4; i++) {       //move all 4 lines
@@ -123,8 +123,10 @@ public class Game2048 extends JPanel {
         }
 
         if (needAddTile) {
+            killObstacle();
             addTile();
         }
+
         if(playWithMovableObstacle)         // if player use to play with Movable Obstacle
             addObstacleMovable();
 

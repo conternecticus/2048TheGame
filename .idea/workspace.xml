@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9b2ace13-e3d0-492c-91d2-19446bc9cf40" name="Default Changelist" comment="Remove JPanelExample class">
+    <list default="true" id="9b2ace13-e3d0-492c-91d2-19446bc9cf40" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/Game2048$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/Game2048$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/Game2048$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/Game2048$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/Game2048.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/Game2048.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/Tile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/Tile.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,23 +17,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Game2048.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5766">
-              <caret line="81" column="89" selection-start-line="81" selection-start-column="89" selection-end-line="81" selection-end-column="89" />
+            <state relative-caret-position="-73">
+              <caret line="280" column="29" lean-forward="true" selection-start-line="280" selection-start-column="29" selection-end-line="280" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#9404#9605#0" expanded="true" />
+                <element signature="e#9604#9605#0" expanded="true" />
+                <element signature="e#14336#14337#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Main.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dsa/project/MovableObstacle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="125">
+              <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Tile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="38" column="59" lean-forward="true" selection-start-line="38" selection-start-column="59" selection-end-line="38" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -56,6 +72,8 @@
       <find>paint</find>
       <find>ensureSize</find>
       <find>isObstacleExist</find>
+      <find>obstacle.png</find>
+      <find>.png</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -81,9 +99,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="836" />
-    <option name="height" value="735" />
+    <option name="x" value="-5" />
+    <option name="width" value="1055" />
+    <option name="height" value="835" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -118,7 +136,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558008810129" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558015398172" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -204,7 +222,7 @@
       <workItem from="1554185401229" duration="1207000" />
       <workItem from="1554195233798" duration="639000" />
       <workItem from="1557208823783" duration="8389000" />
-      <workItem from="1558005741534" duration="3310000" />
+      <workItem from="1558005741534" duration="8160000" />
     </task>
     <task id="LOCAL-00001" summary="Remove JPanelExample class">
       <created>1558008648094</created>
@@ -213,19 +231,19 @@
       <option name="project" value="LOCAL" />
       <updated>1558008648094</updated>
     </task>
-    <task id="LOCAL-00002" summary="Change the color of &quot;Victory&quot;/&quot;Game over&quot; screen">
-      <created>1553954219024</created>
+    <task id="LOCAL-00002" summary="Added movable obstacle images">
+      <created>1558009334805</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1553954219024</updated>
+      <updated>1558009334805</updated>
     </task>
-    <task id="LOCAL-00003" summary="Altered with H's version">
-      <created>1554011005582</created>
+    <task id="LOCAL-00003" summary="Added switch case for obstacle masks, and updated image files for obstacle as well.">
+      <created>1558012546347</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1554011005582</updated>
+      <updated>1558012546347</updated>
     </task>
     <task id="LOCAL-00004" summary="Changed tiles color scheme, creating a gradient going to cold (2) to hot (2048)">
       <created>1554044508901</created>
@@ -290,11 +308,11 @@
       <option name="project" value="LOCAL" />
       <updated>1554124931055</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1825000" />
+    <option name="totallyTimeSpent" value="6675000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -307,8 +325,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1738255" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1738255" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -327,7 +346,7 @@
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32941177" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.9279412" />
-      <window_info anchor="bottom" id="Run" order="12" visible="true" weight="0.31176472" />
+      <window_info anchor="bottom" id="Run" order="12" weight="0.04411765" />
       <window_info anchor="right" id="Maven" order="0" />
       <window_info anchor="right" id="Database" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
@@ -382,23 +401,49 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Remove JPanelExample class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove JPanelExample class" />
+    <MESSAGE value="Added movable obstacle images" />
+    <MESSAGE value="Added switch case for obstacle masks, and updated image files for obstacle as well." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added switch case for obstacle masks, and updated image files for obstacle as well." />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Game2048.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5766">
-          <caret line="81" column="89" selection-start-line="81" selection-start-column="89" selection-end-line="81" selection-end-column="89" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/FixedObstacle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4690">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/MovableObstacle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Tile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="38" column="59" lean-forward="true" selection-start-line="38" selection-start-column="59" selection-end-line="38" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Game2048.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-73">
+          <caret line="280" column="29" lean-forward="true" selection-start-line="280" selection-start-column="29" selection-end-line="280" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#9404#9605#0" expanded="true" />
+            <element signature="e#9604#9605#0" expanded="true" />
+            <element signature="e#14336#14337#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9b2ace13-e3d0-492c-91d2-19446bc9cf40" name="Default Changelist" comment="">
+    <list default="true" id="9b2ace13-e3d0-492c-91d2-19446bc9cf40" name="Default Changelist" comment="Remove JPanelExample class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/Game2048$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/Game2048$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/Game2048.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/Game2048.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/2048TheGame/com/dsa/project/JPanelExample.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/dsa/project/JPanelExample.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -122,7 +118,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558008616233" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558008810129" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -208,14 +204,14 @@
       <workItem from="1554185401229" duration="1207000" />
       <workItem from="1554195233798" duration="639000" />
       <workItem from="1557208823783" duration="8389000" />
-      <workItem from="1558005741534" duration="2637000" />
+      <workItem from="1558005741534" duration="3310000" />
     </task>
-    <task id="LOCAL-00001" summary="2nd commit, right?">
-      <created>1553953354411</created>
+    <task id="LOCAL-00001" summary="Remove JPanelExample class">
+      <created>1558008648094</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1553953354411</updated>
+      <updated>1558008648094</updated>
     </task>
     <task id="LOCAL-00002" summary="Change the color of &quot;Victory&quot;/&quot;Game over&quot; screen">
       <created>1553954219024</created>
@@ -294,10 +290,11 @@
       <option name="project" value="LOCAL" />
       <updated>1554124931055</updated>
     </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1152000" />
+    <option name="totallyTimeSpent" value="1825000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -382,6 +379,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Remove JPanelExample class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove JPanelExample class" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Game2048.java">

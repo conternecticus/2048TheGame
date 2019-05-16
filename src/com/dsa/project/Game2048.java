@@ -31,6 +31,11 @@ public class Game2048 extends JPanel {
     private boolean isLost = false;
     public static int myScore = 0;
     private Image image = ImageIO.read(new File("Cone.png"));
+    private Image obs5 = ImageIO.read(new File("Obstacle5.png"));
+    private Image obs4 = ImageIO.read(new File("Obstacle4.png"));
+    private Image obs3 = ImageIO.read(new File("Obstacle3.png"));
+    private Image obs2 = ImageIO.read(new File("Obstacle2.png"));
+    private Image obs1 = ImageIO.read(new File("Obstacle1.png"));
 
 
     public Game2048() throws IOException {
@@ -268,16 +273,48 @@ public class Game2048 extends JPanel {
         int xOffset = offsetCoors(x);
         int yOffset = offsetCoors(y+1);
 
+
+
         ImageObserver ob = new ImageObserver() {
             @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
                 return false;
             }
         };
-        if(value == -6){ //apply image for object -6
-            g.setColor(tile.getBackground());
-            g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
-            g.drawImage(image, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);     //draw obstacle
+
+        if(value <0) { //switch case for both kinds of obstacle
+            switch (value) {
+                case -6:
+                g.setColor(tile.getBackground());
+                g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
+                g.drawImage(image, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);     //draw obstacle
+                break;
+                case -5:
+                    g.setColor(tile.getBackground());
+                    g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
+                    g.drawImage(obs5, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);
+                    break;
+                case -4:
+                    g.setColor(tile.getBackground());
+                    g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
+                    g.drawImage(obs4, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);
+                    break;
+                case -3:
+                    g.setColor(tile.getBackground());
+                    g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
+                    g.drawImage(obs3, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);
+                    break;
+                case -2:
+                    g.setColor(tile.getBackground());
+                    g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
+                    g.drawImage(obs2, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);
+                    break;
+                case -1:
+                    g.setColor(tile.getBackground());
+                    g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
+                    g.drawImage(obs1, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);
+                    break;
+            }
         }
         else {
 

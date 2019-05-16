@@ -116,9 +116,10 @@ public class Game2048 extends JPanel {
                     needAddTile = true;
                 }
             }
-            if(needAddTile)
+            if(needAddTile) {
                 addTile();
-            moveObstacle.killObstacle();
+                moveObstacle.killObstacle();
+            }
             moveObstacle.add();
         }
     }

@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.awt.image.*;
 import java.io.*;
-import javax.swing.*;
 import javax.imageio.ImageIO;
 
 public class Game2048 extends JPanel {
@@ -21,18 +20,24 @@ public class Game2048 extends JPanel {
     private static final int TILE_SIZE = 100;
     private static final int TILES_MARGIN = 15;
 
-    private Tile[] GameTiles;
-    private boolean isWon = false;
+    public static boolean isObstacleExist = false;
+    private boolean playWithMovableObstacle = false;
+    private MovableObstacle moveObstacle = new MovableObstacle();
+    private FixedObstacle fixedObstacle = new FixedObstacle();
+    public static int BOSSHEALTH = -5;
+
+    public static Tile[] GameTiles;
+    public static boolean isWon = false;
     private boolean isLost = false;
-    private int myScore = 0;
-    private Image image = ImageIO.read(new File("Cone.png"));;
+    public static int myScore = 0;
+    private Image image = ImageIO.read(new File("Cone.png"));
 
 
     public Game2048() throws IOException {
-        setFocusable(true);                 //To ensure that keyboard focus is available, so keyboard events are fired
-        addKeyListener(new KeyAdapter() {   //KeyAdapter is an object that registered to receive events by using addKeyListener method
+        setFocusable(true);                 // To ensure that keyboard focus is available, so keyboard events are fired
+        addKeyListener(new KeyAdapter() {   // KeyAdapter is an object that registered to receive events by using addKeyListener method
             @Override
-            public void keyPressed(KeyEvent keyPressed) {   //An object of class KeyEvent is passed to the KeyAdapter so KeyAdapter can handle with keyboard events
+            public void keyPressed(KeyEvent keyPressed) {   // An object of class KeyEvent is passed to the KeyAdapter so KeyAdapter can handle with keyboard events
                 if(keyPressed.getKeyCode() == KeyEvent.VK_A ||
                         keyPressed.getKeyCode() == KeyEvent.VK_B ||
                         keyPressed.getKeyCode() == KeyEvent.VK_C) {
@@ -74,60 +79,48 @@ public class Game2048 extends JPanel {
         }
         addTile();  //spawn 2 random tiles
         addTile();
-        if (keyEventCode == KeyEvent.VK_B)  //if user press B, play with Obstacle
+        if (keyEventCode == KeyEvent.VK_B)  //if user press B, play with movable Obstacle
             playWithMovableObstacle = true;
-        if (keyEventCode == KeyEvent.VK_A)
+        if (keyEventCode == KeyEvent.VK_C)  // if user press C, play with fixed Obstacle
+        {
+            playWithMovableObstacle = false;
+            fixedObstacle.add();
+        }
+        if(keyEventCode == KeyEvent.VK_A)   // if user press A, play with Normal mode, no obstacle is added but setting playWithMovableObstacle to false
             playWithMovableObstacle = false;
     }
-    
-    private void addObstacleMovable() {
-        //if obstacle is already there
-        if(isObstacleExist)
-            return;
 
-        int random = (int) (Math.random() * 10 + 1);
-        if (random <= 3) {
-            List<Tile> list = availableSpace();
-            if (!availableSpace().isEmpty()) {
-                double randy = Math.random(); //a random number from 0.0 to 1.0, for debug purpose
-                int index = (int) (randy * list.size()) % list.size(); //create a random index to add a new tile
-                Tile emptyTime = list.get(index);
-                emptyTime.setValue(BOSSHEALTH);
-            }
-            isObstacleExist = true;
-        }
-    }
 
-    private void killObstacle() {
-        if(isObstacleExist) {
-            for (int i = 0; i < 16; i++) {
-                if (GameTiles[i].getValue() < 0) {
-                    GameTiles[i].setValue(GameTiles[i].getValue() + 1);
-                    if(GameTiles[i].getValue() == 0)
-                        isObstacleExist = false;
-                }
-            }
-        }
-    }
-
-    public void left() {
+    private void left() {
         boolean needAddTile = false;
 
-        for (int i = 0; i < 4; i++) {       //move all 4 lines
-            Tile[] line = getLine(i);
-            Tile[] merged = mergeLine(moveLine(line));      //merged line or moved if not merge-able
-            setLine(i, merged);
-            if (!needAddTile && !compare(line, merged)) {
-                needAddTile = true;
+        if(!playWithMovableObstacle)            // playWithMovableObstacle is false means user is play in with mode A or C, then tiles are moved and merged in the same way for Normal mode and Fixed Obstacle mode
+        {
+            for (int i = 0; i < 4; i++) {       //move all 4 lines
+                Tile[] line = getLine(i);
+                Tile[] merged = fixedObstacle.mergeLineFixedObstacle(fixedObstacle.moveLineFixedObstacle(line));      //merged line or moved if not merge-able
+                setLine(i, merged);
+                if (!needAddTile && !compare(line, merged)) {
+                    needAddTile = true;
+                }
             }
+            if(needAddTile)
+                addTile();
         }
-
-        if (needAddTile) {
-            addTile();
+        else {                               // if player use to play with mode B, Movable Obstacle
+            for (int i = 0; i < 4; i++) {       //move all 4 lines
+                Tile[] line = getLine(i);
+                Tile[] merged = moveObstacle.mergeLineMovableObstacle(moveObstacle.moveLineMovableObstacle(line));      //merged line or moved if not merge-able
+                setLine(i, merged);
+                if (!needAddTile && !compare(line, merged)) {
+                    needAddTile = true;
+                }
+            }
+            if(needAddTile)
+                addTile();
+            moveObstacle.killObstacle();
+            moveObstacle.add();
         }
-        if(playWithMovableObstacle)         // if player use to play with Movable Obstacle
-            addObstacleMovable();
-
     }
 
     private Tile[] rotate(int angle) {
@@ -153,210 +146,8 @@ public class Game2048 extends JPanel {
         return newTiles;
     }
 
-    private Tile[] moveLine(Tile[] oldLine) { //This method makes all the tiles stack to one direction, not merge them.
-        LinkedList<Tile> l = new LinkedList<Tile>();
-        Tile[] newLine = new Tile[4];
-        if(((oldLine[0].getValue() + oldLine[1].getValue() + oldLine[2].getValue() + oldLine[3].getValue())%2)==0) {  //When the line has no obstacle
-            for (int i = 0; i < 4; i++) {
-                if (!oldLine[i].isEmpty())
-                    l.addLast(oldLine[i]);
-            }
-            if (l.size() == 0) {
-                return oldLine;
-            } else {
-                ensureSize(l, 4); //Ensure that the new stacked line must have 4 elements
-                for (int i = 0; i < 4; i++) {
-                    newLine[i] = l.removeFirst();
-                }
-            }
-        }
-        else{
-            if(oldLine[1].getValue()==-1){
-                for(int i=2; i<4; i++){
-                    if(!oldLine[i].isEmpty())
-                        l.addLast(oldLine[i]);
-                }
-                if (l.size() == 0) {
-                    return oldLine;
-                } else {
-                    ensureSize(l, 2); //Ensure that the new stacked line must have 2 elements
-                    newLine[0] = oldLine[0];
-                    newLine[1] = oldLine[1];
-                    for (int i = 2; i < 4; i++) {
-                        newLine[i] = l.removeFirst();
-                    }
-                }
-            }
-            if(oldLine[2].getValue()==-1){
-                for(int i=0; i<2; i++){
-                    if(!oldLine[i].isEmpty())
-                        l.addLast(oldLine[i]);
-                }
-                if (l.size() == 0) {
-                    return oldLine;
-                } else {
-                    ensureSize(l, 2); //Ensure that the new stacked line must have 2 elements
-                    for (int i = 0; i < 2; i++) {
-                        newLine[i] = l.removeFirst();
-                        newLine[2] = oldLine[2];
-                        newLine[3] = oldLine[3];
-                    }
-                }
-            }
-            if(oldLine[0].getValue()==-1){
-                for (int i = 1; i < 4; i++) {
-                    if (!oldLine[i].isEmpty())
-                        l.addLast(oldLine[i]);
-                }
-                if (l.size() == 0) {
-                    return oldLine;
-                } else {
-                    ensureSize(l, 3); //Ensure that the new stacked to the right of the obstacle line must have 3 elements
-                    newLine[0] = oldLine[0];
-                    for (int i = 1; i < 4; i++) {
-                        newLine[i] = l.removeFirst();
-                    }
-                }
-            }
-            if(oldLine[3].getValue()==-1){
-                for (int i = 0; i < 3; i++) {
-                    if (!oldLine[i].isEmpty())
-                        l.addLast(oldLine[i]);
-                }
-                if (l.size() == 0) {
-                    return oldLine;
-                } else {
-                    ensureSize(l, 3); //Ensure that the new stacked to the right of the obstacle line must have 3 elements
-                    for (int i = 0; i < 3; i++) {
-                        newLine[i] = l.removeFirst();
-                    }
-                    newLine[3] = oldLine[3];
-                }
-            }
-        }
-        return newLine;
-    }
 
-    private Tile[] mergeLine(Tile[] oldTile) {
-        LinkedList<Tile> list = new LinkedList<Tile>();
-        Tile[] newLine = new Tile[4];
-        if(((oldTile[0].getValue() + oldTile[1].getValue() + oldTile[2].getValue() + oldTile[3].getValue())%2)==0) {  //When the line has no obstacle
-            for (int i = 0; i < 4 && !(oldTile[i].isEmpty()); i++) {        // oldLine is NOT empty
-                int num = oldTile[i].getValue();                            // current value of current Tile
-                if ((i < 3) && (oldTile[i].getValue() == oldTile[i + 1].getValue())) {  //if current Tile and next Tile is equal
-                    num *= 2;                       // num is now doubled
-                    myScore += num;                 // update score
-
-                    if (num == 2048) {
-                        isWon = true;
-                    }
-
-                    i++;
-                }
-                list.add(new Tile(num));
-            }
-            if (list.size() == 0) {
-                return oldTile;
-            } else {
-                ensureSize(list, 4);
-                for(int i=0;i<4;i++)
-                    newLine[i]=list.remove();
-            }
-        }
-        else{                                               // Obstacle
-            if(oldTile[1].getValue()==-1){                  // if the obstacle is in index 1, then we just need to merge the two Tiles to the right of the obstacle
-                if(oldTile[2].getValue()==oldTile[3].getValue()){   // do the merging for the two last tiles to the right of the obstacle
-                    int num = oldTile[2].getValue();
-                    num *=2;
-                    myScore += num;
-                    if (num == 2048) {
-                        isWon = true;
-                    }
-                    list.add(new Tile(num));
-                }
-                if (list.size() == 0) {
-                    return oldTile;
-                } else {
-                    ensureSize(list, 2);                // ensure list is having 2 Tiles, which
-                    newLine[0] = oldTile[0];
-                    newLine[1] = oldTile[1];
-                    newLine[2] = list.remove();
-                    newLine[3] = list.remove();
-                }
-            }
-            if(oldTile[2].getValue()==-1){    // obstacle is in index 2
-                if(oldTile[0].getValue()==oldTile[1].getValue()){
-                    int num = oldTile[1].getValue();
-                    num *=2;
-                    myScore += num;
-                    if (num == 2048) {
-                        isWon = true;
-                    }
-                    list.add(new Tile(num));
-                }
-                if (list.size() == 0) {
-                    return oldTile;
-                } else {
-                    ensureSize(list, 2);
-                    newLine[0] = list.remove();
-                    newLine[1] = list.remove();
-                    newLine[2] = oldTile[2];
-                    newLine[3] = oldTile[3];
-                }
-            }
-            if(oldTile[0].getValue()==-1){    //obstacle in index 0
-                for(int i=1; i<4 && !oldTile[i].isEmpty();i++){
-                    int num = oldTile[i].getValue();                            // current value of current Tile
-                    if ((i < 3) && (oldTile[i].getValue() == oldTile[i + 1].getValue())) {  //if current Tile and next Tile is equal
-                        num *= 2;                       // num is now doubled
-                        myScore += num;                 // update score
-
-                        if (num == 2048) {
-                            isWon = true;
-                        }
-
-                        i++;
-                    }
-                    list.add(new Tile(num));
-                }
-                if (list.size() == 0) {
-                    return oldTile;
-                } else {
-                    ensureSize(list, 3);
-                    newLine[0] = oldTile[0];
-                    for(int i=1;i<4;i++)
-                        newLine[i]=list.remove();
-                }
-            }
-            if(oldTile[3].getValue()==-1){      // obstacle in index 3
-                for(int i=0; i<3 && !oldTile[i].isEmpty();i++){
-                    int num = oldTile[i].getValue();                            // current value of current Tile
-                    if ((i < 2) && (oldTile[i].getValue() == oldTile[i + 1].getValue())) {  //if current Tile and next Tile is equal
-                        num *= 2;                       // num is now doubled
-                        myScore += num;                 // update score
-
-                        if (num == 2048) {
-                            isWon = true;
-                        }
-
-                        i++;
-                    }
-                    list.add(new Tile(num));
-                }
-                if (list.size() == 0) {
-                    return oldTile;
-                } else {
-                    ensureSize(list, 3);
-                    for(int i=0;i<3;i++)
-                        newLine[i]=list.remove();
-                    newLine[3] = oldTile[3];
-                }
-            }
-        }
-        return newLine;
-    }
-
-    private static void ensureSize(List<Tile> l, int s) {
+    public static void ensureSize(List<Tile> l, int s) {
         while (l.size() != s) {
             l.add(new Tile());
         }
@@ -370,19 +161,19 @@ public class Game2048 extends JPanel {
         return result;
     }
 
-    public void right() {
+    private void right() {
         GameTiles = rotate(180);
         left();
         GameTiles = rotate(180);
     }
 
-    public void up() {
+    private void up() {
         GameTiles = rotate(270);
         left();
         GameTiles = rotate(90);
     }
 
-    public void down() {
+    private void down() {
         GameTiles = rotate(90);
         left();
         GameTiles = rotate(270);
@@ -403,17 +194,7 @@ public class Game2048 extends JPanel {
     }
 
 
-    private void addObstacle() {
-        List<Tile> list = availableSpace();
-        if (!list.isEmpty()) {
-            double randy = Math.random(); //a random number from 0.0 to 1.0, for debug purpose
-            int index = (int) (randy * list.size()) % list.size(); //create a random index to add a new tile
-            Tile emptyTime = list.get(index);
-            emptyTime.setValue(-1);
-        }
-    }
-
-    private List<Tile> availableSpace() {
+    public static List<Tile> availableSpace() {
         final List<Tile> list = new ArrayList<Tile>(16);    //declare a list with fixed amount of tiles
         for (Tile t : GameTiles) {
             if (t.isEmpty()) {
@@ -427,7 +208,7 @@ public class Game2048 extends JPanel {
         return availableSpace().size() == 0;
     }
 
-    boolean canMove() {
+    private boolean canMove() {
         if (!isFull()) {
             return true;
         }
@@ -486,42 +267,16 @@ public class Game2048 extends JPanel {
         int xOffset = offsetCoors(x);
         int yOffset = offsetCoors(y+1);
 
-        BufferedImageOp op = new BufferedImageOp() {
-            @Override
-            public BufferedImage filter(BufferedImage src, BufferedImage dest) {
-                return null;
-            }
-
-            @Override
-            public Rectangle2D getBounds2D(BufferedImage src) {
-                return null;
-            }
-
-            @Override
-            public BufferedImage createCompatibleDestImage(BufferedImage src, ColorModel destCM) {
-                return null;
-            }
-
-            @Override
-            public Point2D getPoint2D(Point2D srcPt, Point2D dstPt) {
-                return null;
-            }
-
-            @Override
-            public RenderingHints getRenderingHints() {
-                return null;
-            }
-        };
         ImageObserver ob = new ImageObserver() {
             @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
                 return false;
             }
         };
-        if(value == -1){ //apply image for object -1
+        if(value == -6){ //apply image for object -6
             g.setColor(tile.getBackground());
             g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
-            g.drawImage(image, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);//draw
+            g.drawImage(image, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);     //draw obstacle
         }
         else {
 

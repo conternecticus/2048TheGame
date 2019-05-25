@@ -4,14 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.image.*;
 import java.io.*;
+import java.util.Stack;
 import javax.imageio.ImageIO;
 
 public class Game2048 extends JPanel {
@@ -31,6 +29,7 @@ public class Game2048 extends JPanel {
     private boolean isLost = false;
     public static int myScore = 0;
     private Image image = ImageIO.read(new File("Cone.png"));
+    private Stack<Tile[]> stack = new Stack<Tile[]>();
 
 
     public Game2048() throws IOException {
@@ -40,25 +39,36 @@ public class Game2048 extends JPanel {
             public void keyPressed(KeyEvent keyPressed) {   // An object of class KeyEvent is passed to the KeyAdapter so KeyAdapter can handle with keyboard events
                 if(keyPressed.getKeyCode() == KeyEvent.VK_A ||
                         keyPressed.getKeyCode() == KeyEvent.VK_B ||
-                        keyPressed.getKeyCode() == KeyEvent.VK_C) {
+                        keyPressed.getKeyCode() == KeyEvent.VK_C ) {
+                    stack.clear();
                     startGame(keyPressed.getKeyCode());
                 }
                 if (!canMove()) {
                     isLost = true;
                 }
 
+                if(keyPressed.getKeyCode() == KeyEvent.VK_Z)
+                    undo();
+
                 if (!isWon && !isLost) {
                     switch (keyPressed.getKeyCode()) {
                         case KeyEvent.VK_LEFT:
+                            Tile[] temp = new Tile[16];
+                            for(int i=0; i<16; i++)
+                                temp[i] = new Tile(GameTiles[i].getValue());
+                            stack.push(temp);
                             left();
                             break;
                         case KeyEvent.VK_RIGHT:
+                            stack.push(GameTiles.clone());
                             right();
                             break;
                         case KeyEvent.VK_DOWN:
+                            stack.push(GameTiles.clone());
                             down();
                             break;
                         case KeyEvent.VK_UP:
+                            stack.push(GameTiles.clone());
                             up();
                             break;
                     }
@@ -67,6 +77,13 @@ public class Game2048 extends JPanel {
             }   //End of overridden keyPress method
         });
         startGame(65);  //Start game in Normal Mode
+
+    }
+
+    public void undo(){
+        if(!stack.isEmpty()) {
+            GameTiles = stack.pop();
+        }
     }
 
     public void startGame(int keyEventCode) {
@@ -93,9 +110,10 @@ public class Game2048 extends JPanel {
 
     private void left() {
         boolean needAddTile = false;
-
+        // stack.add(GameTiles);                   // add GameTiles to stack before making any changes on GameTiles
         if(!playWithMovableObstacle)            // playWithMovableObstacle is false means user is play in with mode A or C, then tiles are moved and merged in the same way for Normal mode and Fixed Obstacle mode
         {
+
             for (int i = 0; i < 4; i++) {       //move all 4 lines
                 Tile[] line = getLine(i);
                 Tile[] merged = fixedObstacle.mergeLineFixedObstacle(fixedObstacle.moveLineFixedObstacle(line));      //merged line or moved if not merge-able
@@ -189,14 +207,15 @@ public class Game2048 extends JPanel {
         if (!list.isEmpty()) {
             double randy = Math.random(); //a random number from 0.0 to 1.0, for debug purpose
             int index = (int) (randy * list.size()) % list.size(); //create a random index to add a new tile
-            Tile emptyTime = list.get(index);   //emptyTime conveys the new value (2 or 4)
+            Tile emptyTime = list.get(index);
             emptyTime.setValue(Math.random() < 0.7 ? 2 : 4); //  chance of spawning 4 is less than 2, 0.7 here can be any number that > 0.5 to make sure that spawning 4 is less than 2
         }
     }
 
 
     public static List<Tile> availableSpace() {
-        final List<Tile> list = new ArrayList<Tile>(16);    //declare a list with fixed amount of tiles
+         final List<Tile> list = new ArrayList<Tile>(16);    //declare a list with fixed amount of tiles
+
         for (Tile t : GameTiles) {
             if (t.isEmpty()) {
                 list.add(t);
@@ -243,7 +262,7 @@ public class Game2048 extends JPanel {
 
 
     private void setLine(int index, Tile[] re) {
-        System.arraycopy(re, 0, GameTiles, index * 4, 4);
+        System.arraycopy(re.clone(), 0, GameTiles, index * 4, 4);
     }
 
     @Override

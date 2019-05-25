@@ -28,8 +28,13 @@ public class Game2048 extends JPanel {
     public static boolean isWon = false;
     private boolean isLost = false;
     public static int myScore = 0;
-    private Image image = ImageIO.read(new File("Cone.png"));
     private Stack<Tile[]> stack = new Stack<Tile[]>();
+    private Image image = ImageIO.read(new File("Image\\Cone.png"));
+    private Image obs5 = ImageIO.read(new File("Image\\Obstacle5.png"));
+    private Image obs4 = ImageIO.read(new File("Image\\Obstacle4.png"));
+    private Image obs3 = ImageIO.read(new File("Image\\Obstacle3.png"));
+    private Image obs2 = ImageIO.read(new File("Image\\Obstacle2.png"));
+    private Image obs1 = ImageIO.read(new File("Image\\Obstacle1.png"));
 
 
     public Game2048() throws IOException {
@@ -287,22 +292,41 @@ public class Game2048 extends JPanel {
         int xOffset = offsetCoors(x);
         int yOffset = offsetCoors(y+1);
 
+
+
         ImageObserver ob = new ImageObserver() {
             @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
                 return false;
             }
         };
-        if(value == -6){ //apply image for object -6
-            g.setColor(tile.getBackground());
-            g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
-            g.drawImage(image, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);     //draw obstacle
+
+        g.setColor(tile.getBackground());
+        g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
+
+        if(value <0) { //switch case for both kinds of obstacle
+            switch (value) {
+                case -6:
+                    g.drawImage(image, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);     //draw obstacle
+                    break;
+                case -5:
+                    g.drawImage(obs5, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);
+                    break;
+                case -4:
+                    g.drawImage(obs4, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);
+                    break;
+                case -3:
+                    g.drawImage(obs3, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);
+                    break;
+                case -2:
+                    g.drawImage(obs2, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);
+                    break;
+                case -1:
+                    g.drawImage(obs1, xOffset, yOffset, TILE_SIZE, TILE_SIZE, ob);
+                    break;
+            }
         }
         else {
-
-            g.setColor(tile.getBackground());
-            g.fillRoundRect(xOffset, yOffset, TILE_SIZE, TILE_SIZE, 10, 10);
-
             // draw 2048 box
             g.setColor(new Color(0x1D1D1D));                        //2048 box to anti-alias
             g.fillRect(20, 3, 150, 70);

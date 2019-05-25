@@ -36,11 +36,11 @@ public class Tile {
 
     public Color getBackground() {
         switch (value) {
-            case -5:    return new Color(0xff0000);     // Movable obstacle
-            case -4:    return new Color(0xe82727);     //
-            case -3:    return new Color(0xcd4444);     //
-            case -2:    return new Color(0x9e5a5a);     //
-            case -1:    return new Color(0x705757);     // Moveable obstacle
+            case -5:    return new Color(0x3a3a3a);     // Movable obstacle
+            case -4:    return new Color(0x3a3a3a);     //
+            case -3:    return new Color(0x3a3a3a);     //
+            case -2:    return new Color(0x3a3a3a);     //
+            case -1:    return new Color(0x3a3a3a);     // Moveable obstacle
             case -6:   return new Color(0x3a3a3a);      // Fixed obstacle
             case 2:    return new Color(0x79c4b4);
             case 4:    return new Color(0x79b5c4);

@@ -48,32 +48,30 @@ public class Game2048 extends JPanel {
                     stack.clear();
                     startGame(keyPressed.getKeyCode());
                 }
-                if (!canMove()) {
+                if (!canMove()) 
                     isLost = true;
-                }
-
-                if(keyPressed.getKeyCode() == KeyEvent.VK_Z)
+                f(keyPressed.getKeyCode() == KeyEvent.VK_Z)          // Press Z to Undo
                     undo();
-
                 if (!isWon && !isLost) {
+                    Tile[] temp = new Tile[16];
+                    for(int i=0; i<16; i++) 
+                        temp[i] = new Tile(GameTiles[i].getValue());
+                    
                     switch (keyPressed.getKeyCode()) {
                         case KeyEvent.VK_LEFT:
-                            Tile[] temp = new Tile[16];
-                            for(int i=0; i<16; i++)
-                                temp[i] = new Tile(GameTiles[i].getValue());
                             stack.push(temp);
                             left();
                             break;
                         case KeyEvent.VK_RIGHT:
-                            stack.push(GameTiles.clone());
+                            stack.push(temp);
                             right();
                             break;
                         case KeyEvent.VK_DOWN:
-                            stack.push(GameTiles.clone());
+                            stack.push(temp);
                             down();
                             break;
                         case KeyEvent.VK_UP:
-                            stack.push(GameTiles.clone());
+                            stack.push(temp);
                             up();
                             break;
                     }

@@ -29,6 +29,7 @@ public class Game2048 extends JPanel {
     private boolean isLost = false;
     public static int myScore = 0;
     private Stack<Tile[]> stack = new Stack<Tile[]>();
+    private Stack<Integer> scorestack = new Stack<Integer>();
     private Image image = ImageIO.read(new File("Image\\Cone.png"));
     private Image obs5 = ImageIO.read(new File("Image\\Obstacle5.png"));
     private Image obs4 = ImageIO.read(new File("Image\\Obstacle4.png"));
@@ -60,18 +61,22 @@ public class Game2048 extends JPanel {
                     switch (keyPressed.getKeyCode()) {
                         case KeyEvent.VK_LEFT:
                             stack.push(temp);
+                            scorestack.push(myScore);
                             left();
                             break;
                         case KeyEvent.VK_RIGHT:
                             stack.push(temp);
+                            scorestack.push(myScore);
                             right();
                             break;
                         case KeyEvent.VK_DOWN:
                             stack.push(temp);
+                            scorestack.push(myScore);
                             down();
                             break;
                         case KeyEvent.VK_UP:
                             stack.push(temp);
+                            scorestack.push(myScore);
                             up();
                             break;
                     }
@@ -87,6 +92,7 @@ public class Game2048 extends JPanel {
         if(!stack.isEmpty()) {
             GameTiles = stack.pop();
         }
+        myScore = scorestack.pop();
     }
 
     public void startGame(int keyEventCode) {
@@ -113,7 +119,6 @@ public class Game2048 extends JPanel {
 
     private void left() {
         boolean needAddTile = false;
-        // stack.add(GameTiles);                   // add GameTiles to stack before making any changes on GameTiles
         if(!playWithMovableObstacle)            // playWithMovableObstacle is false means user is play in with mode A or C, then tiles are moved and merged in the same way for Normal mode and Fixed Obstacle mode
         {
 

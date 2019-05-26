@@ -50,7 +50,7 @@ public class Game2048 extends JPanel {
                 }
                 if (!canMove()) 
                     isLost = true;
-                f(keyPressed.getKeyCode() == KeyEvent.VK_Z)          // Press Z to Undo
+                if(keyPressed.getKeyCode() == KeyEvent.VK_Z)          // Press Z to Undo
                     undo();
                 if (!isWon && !isLost) {
                     Tile[] temp = new Tile[16];

@@ -47,10 +47,13 @@ public class Game2048 extends JPanel {
                         keyPressed.getKeyCode() == KeyEvent.VK_C ) {
                     startGame(keyPressed.getKeyCode());
                 }
-                if (!canMove()) 
-                    isLost = true;
-                if(keyPressed.getKeyCode() == KeyEvent.VK_Z)          // Press Z to Undo
+                if(keyPressed.getKeyCode() == KeyEvent.VK_Z) {        // Press Z to Undo
                     undo();
+                    if(!isObstacleExist)
+                        isObstacleExist = true;
+                }
+                if (!canMove())
+                    isLost = true;
                 if (!isWon && !isLost) {
                     Tile[] temp = new Tile[16];
                     for(int i=0; i<16; i++) 
@@ -98,8 +101,10 @@ public class Game2048 extends JPanel {
         }
         addTile();  //spawn 2 random tiles
         addTile();
-        if (keyEventCode == KeyEvent.VK_B)  //if user press B, play with movable Obstacle
+        if (keyEventCode == KeyEvent.VK_B) { //if user press B, play with movable Obstacle
             playWithMovableObstacle = true;
+            isObstacleExist = false;
+        }
         if (keyEventCode == KeyEvent.VK_C)  // if user press C, play with fixed Obstacle
         {
             playWithMovableObstacle = false;

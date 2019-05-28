@@ -110,7 +110,7 @@ public class Game2048 extends JPanel {
             playWithMovableObstacle = false;
             fixedObstacle.add();
         }
-        if(keyEventCode == KeyEvent.VK_A || keyEventCode == KeyEvent.VK_SPACE)   // if user press A, play with Normal mode, no obstacle is added but setting playWithMovableObstacle to false
+        if(keyEventCode == KeyEvent.VK_A )   // if user press A, play with Normal mode, no obstacle is added but setting playWithMovableObstacle to false
             playWithMovableObstacle = false;
     }
 
@@ -372,7 +372,7 @@ public class Game2048 extends JPanel {
             g.setColor(new Color(0x79c4b4));
 
             g.setFont(new Font(FONT_NAME, Font.BOLD, 25));
-            g.drawString("Press Space to restart", 110, getHeight() - 40);
+            g.drawString("Press A, B or C to restart", 110, getHeight() - 40); //Found and fixed a bug, game now can only be restarted by pressing A, B or C
 
             g.setFont(new Font(FONT_NAME, Font.BOLD, 48));
 

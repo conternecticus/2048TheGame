@@ -372,7 +372,7 @@ public class Game2048 extends JPanel {
             g.setColor(new Color(0x79c4b4));
 
             g.setFont(new Font(FONT_NAME, Font.BOLD, 25));
-            g.drawString("Press A, B or C to restart", 110, getHeight() - 40); //Found and fixed a bug, game now can only be restarted by pressing A, B or C
+            g.drawString("Press A, B or C to restart", 110, getHeight() - 40); //
 
             g.setFont(new Font(FONT_NAME, Font.BOLD, 48));
 

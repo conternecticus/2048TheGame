@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.awt.image.*;
 import java.io.*;
@@ -28,8 +27,8 @@ public class Game2048 extends JPanel {
     public static boolean isWon = false;
     private boolean isLost = false;
     public static int myScore = 0;
-    private Stack<Tile[]> stack = new Stack<Tile[]>();
-    private Stack<Integer> scorestack = new Stack<Integer>();
+    private Stack<Tile[]> boardStack = new Stack<Tile[]>();
+    private Stack<Integer> scoreStack = new Stack<Integer>();
     private Image image = ImageIO.read(new File("Image\\Cone.png"));
     private Image obs5 = ImageIO.read(new File("Image\\Obstacle5.png"));
     private Image obs4 = ImageIO.read(new File("Image\\Obstacle4.png"));
@@ -46,7 +45,6 @@ public class Game2048 extends JPanel {
                 if(keyPressed.getKeyCode() == KeyEvent.VK_A ||
                         keyPressed.getKeyCode() == KeyEvent.VK_B ||
                         keyPressed.getKeyCode() == KeyEvent.VK_C ) {
-                    stack.clear();
                     startGame(keyPressed.getKeyCode());
                 }
                 if (!canMove()) 
@@ -60,23 +58,23 @@ public class Game2048 extends JPanel {
                     
                     switch (keyPressed.getKeyCode()) {
                         case KeyEvent.VK_LEFT:
-                            stack.push(temp);
-                            scorestack.push(myScore);
+                            boardStack.push(temp);
+                            scoreStack.push(myScore);
                             left();
                             break;
                         case KeyEvent.VK_RIGHT:
-                            stack.push(temp);
-                            scorestack.push(myScore);
+                            boardStack.push(temp);
+                            scoreStack.push(myScore);
                             right();
                             break;
                         case KeyEvent.VK_DOWN:
-                            stack.push(temp);
-                            scorestack.push(myScore);
+                            boardStack.push(temp);
+                            scoreStack.push(myScore);
                             down();
                             break;
                         case KeyEvent.VK_UP:
-                            stack.push(temp);
-                            scorestack.push(myScore);
+                            boardStack.push(temp);
+                            scoreStack.push(myScore);
                             up();
                             break;
                     }
@@ -88,14 +86,9 @@ public class Game2048 extends JPanel {
 
     }
 
-    public void undo(){
-        if(!stack.isEmpty()) {
-            GameTiles = stack.pop();
-        }
-        myScore = scorestack.pop();
-    }
-
     public void startGame(int keyEventCode) {
+        boardStack.clear();
+        scoreStack.clear();
         myScore = 0;
         isWon = false;
         isLost = false;
@@ -112,42 +105,8 @@ public class Game2048 extends JPanel {
             playWithMovableObstacle = false;
             fixedObstacle.add();
         }
-        if(keyEventCode == KeyEvent.VK_A)   // if user press A, play with Normal mode, no obstacle is added but setting playWithMovableObstacle to false
+        if(keyEventCode == KeyEvent.VK_A || keyEventCode == KeyEvent.VK_SPACE)   // if user press A, play with Normal mode, no obstacle is added but setting playWithMovableObstacle to false
             playWithMovableObstacle = false;
-    }
-
-
-    private void left() {
-        boolean needAddTile = false;
-        if(!playWithMovableObstacle)            // playWithMovableObstacle is false means user is play in with mode A or C, then tiles are moved and merged in the same way for Normal mode and Fixed Obstacle mode
-        {
-
-            for (int i = 0; i < 4; i++) {       //move all 4 lines
-                Tile[] line = getLine(i);
-                Tile[] merged = fixedObstacle.mergeLineFixedObstacle(fixedObstacle.moveLineFixedObstacle(line));      //merged line or moved if not merge-able
-                setLine(i, merged);
-                if (!needAddTile && !compare(line, merged)) {
-                    needAddTile = true;
-                }
-            }
-            if(needAddTile)
-                addTile();
-        }
-        else {                               // if player use to play with mode B, Movable Obstacle
-            for (int i = 0; i < 4; i++) {       //move all 4 lines
-                Tile[] line = getLine(i);
-                Tile[] merged = moveObstacle.mergeLineMovableObstacle(moveObstacle.moveLineMovableObstacle(line));      //merged line or moved if not merge-able
-                setLine(i, merged);
-                if (!needAddTile && !compare(line, merged)) {
-                    needAddTile = true;
-                }
-            }
-            if(needAddTile) {
-                addTile();
-                moveObstacle.killObstacle();
-            }
-            moveObstacle.add();
-        }
     }
 
     private Tile[] rotate(int angle) {
@@ -188,6 +147,43 @@ public class Game2048 extends JPanel {
         return result;
     }
 
+    private void setLine(int index, Tile[] re) {
+        System.arraycopy(re.clone(), 0, GameTiles, index * 4, 4);
+    }
+
+    private void left() {
+        boolean needAddTile = false;
+        if(!playWithMovableObstacle)            // playWithMovableObstacle is false means user is play in with mode A or C, then tiles are moved and merged in the same way for Normal mode and Fixed Obstacle mode
+        {
+
+            for (int i = 0; i < 4; i++) {       //move all 4 lines
+                Tile[] line = getLine(i);
+                Tile[] merged = fixedObstacle.mergeLineFixedObstacle(fixedObstacle.moveLineFixedObstacle(line));      //merged line or moved if not merge-able
+                setLine(i, merged);
+                if (!needAddTile && !compare(line, merged)) {
+                    needAddTile = true;
+                }
+            }
+            if(needAddTile)
+                addTile();
+        }
+        else {                               // if player use to play with mode B, Movable Obstacle
+            for (int i = 0; i < 4; i++) {       //move all 4 lines
+                Tile[] line = getLine(i);
+                Tile[] merged = moveObstacle.mergeLineMovableObstacle(moveObstacle.moveLineMovableObstacle(line));      //merged line or moved if not merge-able
+                setLine(i, merged);
+                if (!needAddTile && !compare(line, merged)) {
+                    needAddTile = true;
+                }
+            }
+            if(needAddTile) {
+                addTile();
+                moveObstacle.killObstacle();
+            }
+            moveObstacle.add();
+        }
+    }
+
     private void right() {
         GameTiles = rotate(180);
         left();
@@ -204,6 +200,13 @@ public class Game2048 extends JPanel {
         GameTiles = rotate(90);
         left();
         GameTiles = rotate(270);
+    }
+
+    public void undo(){
+        if(!boardStack.isEmpty())
+            GameTiles = boardStack.pop();
+        if(!scoreStack.isEmpty())
+            myScore = scoreStack.pop();
     }
 
     private Tile tileAt(int x, int y) {
@@ -265,12 +268,6 @@ public class Game2048 extends JPanel {
             }
         }
         return true;
-    }
-
-
-
-    private void setLine(int index, Tile[] re) {
-        System.arraycopy(re.clone(), 0, GameTiles, index * 4, 4);
     }
 
     @Override

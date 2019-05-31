@@ -17,12 +17,12 @@ public class Menu {
     public Menu() {
         //Start game
         this.game = new JFrame();
-        game.setTitle("2048 DSA IU");
-        game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        game.setSize(490, 700);
-        game.setResizable(false);
+        game.setTitle("2048 by Heart Hunters in Monster Kingdom");          // set title of game window
+        game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);       //exit program when window is closed
+        game.setSize(490, 700);                                 //set window size
+        game.setResizable(false);                                           // cannot resize window
         game.setLocationRelativeTo(null);
-        game.setVisible(false);
+        game.setVisible(false);                                             // set visibility of window, program will stop if 'false'
 
         fixedObstacleButton.addActionListener(new ActionListener() {
             @Override
@@ -78,11 +78,16 @@ public class Menu {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Shit");
+        JFrame frame = new JFrame("2048 Menu by Heart Hunters in Monster Kingdom");
         frame.setContentPane(new Menu().menuView);
-        frame.setPreferredSize(new Dimension(500, 500));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(450, 450));
         frame.pack();
         frame.setVisible(true);
+        frame.setResizable(false);
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

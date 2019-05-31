@@ -1,4 +1,3 @@
-package com.dsa.project;
 import java.util.List;
 import java.util.LinkedList;
 
@@ -62,7 +61,7 @@ public class MovableObstacle {
             int num = oldTile[i].getValue();                            // current value of current Tile
             if ((i < 3) && (oldTile[i].getValue() == oldTile[i + 1].getValue())) {  //if current Tile and next Tile is equal
                 num *= 2;                       // num is now doubled
-                Game2048.myScore += num;        // update score
+                Game2048.myScore += num;                 // update score
 
                 if (num == maxValue) {
                     Game2048.isWon = true;

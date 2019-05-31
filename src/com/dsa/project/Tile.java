@@ -1,3 +1,5 @@
+package com.dsa.project;
+
 import java.awt.*;
 
 public class Tile {

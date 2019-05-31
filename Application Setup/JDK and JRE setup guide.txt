@@ -1,0 +1,20 @@
+IMPORTANT: Since this game is a Java Application, user is required to
+setup JDK environment for Computer System.
+
+========== HOW TO SETUP JDK FOR WINDOWS SYSTEM =============
+
+1. Go to Control Panel -> System and Security -> System
+2. On the left panel, choose "Advanced System Settings"
+3. In the pop up window, choose "Environment Variables"
+4. Under the "System Variables", select "New"
+5. In the pop-up window, set "Variable name" to "JAVA_HOME", 
+	"Browse Directory" to your jdk folder.
+	Example: C:\Program Files\Java\jdk1.8.0_212
+6. Click "OK"
+
+========== HOW TO SETUP JRE FOR WINDOWS SYSTEM =============
+1 -> 4: Same as above
+5. In the pop-up window, set "Variable name" to "JRE_HOME", 
+	"Browse Directory" to your jre folder.
+	Example: C:\Program Files\Java\jre1.8.0_212
+6. Click "OK"

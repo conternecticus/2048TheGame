@@ -1,4 +1,3 @@
-package com.dsa.project;
 import java.io.InputStream;
 
 final public class ResourceLoader {

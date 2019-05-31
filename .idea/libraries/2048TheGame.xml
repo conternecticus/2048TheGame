@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="2048TheGame">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/Damn_jar/2048TheGame.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

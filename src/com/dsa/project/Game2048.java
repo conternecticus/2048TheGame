@@ -29,16 +29,12 @@ public class Game2048 extends JPanel {
     public static boolean isWon = false;
     private boolean isLost = false;
     public static int myScore = 0;
-    private Image image = ImageIO.read(ResourceLoader.load("Cone.png"));
-    private Image obs5 = ImageIO.read(ResourceLoader.load("Obstacle5.png"));
-    private Image obs4 = ImageIO.read(ResourceLoader.load("Obstacle4.png"));
-    private Image obs3 = ImageIO.read(ResourceLoader.load("Obstacle3.png"));
-    private Image obs2 = ImageIO.read(ResourceLoader.load("Obstacle2.png"));
-    private Image obs1 = ImageIO.read(ResourceLoader.load("Obstacle1.png"));
-    private Image Jamie = ImageIO.read(ResourceLoader.load("Jamie.jpg"));
-    private Image Hieu = ImageIO.read(ResourceLoader.load("James.jpg"));
-    private Image Khanh = ImageIO.read(ResourceLoader.load("Ray.jpg"));
-    private Image Mint = ImageIO.read(ResourceLoader.load("Mint.jpg"));
+    private Image image = ImageIO.read(new File("Image/Cone.png"));
+    private Image obs5 = ImageIO.read(new File("Image/Obstacle5.png"));
+    private Image obs4 = ImageIO.read(new File("Image/Obstacle4.png"));
+    private Image obs3 = ImageIO.read(new File("Image/Obstacle3.png"));
+    private Image obs2 = ImageIO.read(new File("Image/Obstacle2.png"));
+    private Image obs1 = ImageIO.read(new File("Image/Obstacle1.png"));
     private static JButton undo;
 
 
@@ -306,6 +302,8 @@ public class Game2048 extends JPanel {
         int xOffset = offsetCoors(x);
         int yOffset = offsetCoors(y+1);
 
+
+
         ImageObserver ob = new ImageObserver() {
             @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
@@ -350,12 +348,6 @@ public class Game2048 extends JPanel {
 
             // draw text in tiles
             g.setColor(new Color(0xeaeaea));
-
-            //Put Signatures in Game board
-            g.drawImage(Hieu, 0, 590, 120, 55, ob);
-            g.drawImage(Mint, 120, 590, 120, 55, ob);
-            g.drawImage(Khanh,240, 590, 120, 55, ob);
-            g.drawImage(Jamie,350, 590, 120, 55, ob);
 
             final int size = value <= 64 ? 60 : value <= 512 ? 50 : 40;
             final Font font = new Font(FONT_NAME, Font.BOLD, size);
@@ -409,5 +401,19 @@ public class Game2048 extends JPanel {
 
     private static int offsetCoors(int arg) {
         return arg * (TILES_MARGIN + TILE_SIZE) + TILES_MARGIN;
+    }
+
+    public static void main(String[] args) throws IOException {
+        JFrame game = new JFrame();
+        game.setTitle("2048 DSA IU");                // set title of game window
+        game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);   //exit problem when window is closed
+        game.setSize(490, 700);                             //set window size
+
+        game.setResizable(false);                                       // cannot resize window
+
+        game.add(new Game2048(true, false));                                       // add new Game2048 object to JFrame
+
+        game.setLocationRelativeTo(null);                               // window appear in the middle of the screen
+        game.setVisible(true);                      // set visibility of window, program will stop if 'false'
     }
 }

@@ -1,16 +1,15 @@
 package com.dsa.project;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.image.ImageObserver;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.image.*;
+import java.io.*;
 import java.util.Stack;
+import javax.imageio.ImageIO;
 
 public class Game2048 extends JPanel {
     private static final Color BACKGROUND = new Color(0x1D1D1D);

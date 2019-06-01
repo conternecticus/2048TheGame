@@ -1,12 +1,12 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.ImageObserver;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.image.*;
-import java.io.*;
-import javax.imageio.ImageIO;
 import java.util.Stack;
 
 public class Game2048 extends JPanel {
@@ -16,8 +16,7 @@ public class Game2048 extends JPanel {
     private static final int TILES_MARGIN = 15;
 
     public static boolean isObstacleExist = false;
-    private boolean playWithMovableObstacle = false;
-    private boolean normalMode = false;
+    private boolean playWithMovableObstacle;
     private MovableObstacle moveObstacle = new MovableObstacle();
     private FixedObstacle fixedObstacle = new FixedObstacle();
     public static int BOSSHEALTH = -5;
@@ -42,9 +41,9 @@ public class Game2048 extends JPanel {
     private static JButton undo;
 
 
-    public Game2048(boolean playWithMovableObstacle, boolean normalMode) throws IOException {
+    public Game2048(boolean playWithMovableObstacle) throws IOException {
         this.playWithMovableObstacle = playWithMovableObstacle;
-        this.normalMode = normalMode;
+
         setFocusable(true);                 // To ensure that keyboard focus is available, so keyboard events are fired
         addKeyListener(new KeyAdapter() {   // KeyAdapter is an object that registered to receive events by using addKeyListener method
             @Override
@@ -112,11 +111,17 @@ public class Game2048 extends JPanel {
         }
         addTile();  //spawn 2 random tiles
         addTile();
-        if (!playWithMovableObstacle) {
-            if (!normalMode) {
-                fixedObstacle.add();
-            }
+        if (keyEventCode == KeyEvent.VK_B) { //if user press B, play with movable Obstacle
+            playWithMovableObstacle = true;
+            isObstacleExist = false;
         }
+        if (keyEventCode == KeyEvent.VK_C)  // if user press C, play with fixed Obstacle
+        {
+            playWithMovableObstacle = false;
+            fixedObstacle.add();
+        }
+        if(keyEventCode == KeyEvent.VK_A )   // if user press A, play with Normal mode, no obstacle is added but setting playWithMovableObstacle to false
+            playWithMovableObstacle = false;
     }
 
 

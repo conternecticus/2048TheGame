@@ -23,7 +23,6 @@ public class Game2048 extends JPanel {
 
     private Stack<Tile[]> boardStack = new Stack<Tile[]>();
     private Stack<Integer> scoreStack = new Stack<Integer>();
-    public static Stack<Boolean> isObstacleExistStack = new Stack<Boolean>();
 
     public static Tile[] GameTiles;
     public static boolean isWon = false;
@@ -53,19 +52,12 @@ public class Game2048 extends JPanel {
                         keyPressed.getKeyCode() == KeyEvent.VK_C ) {
                     scoreStack.clear();
                     boardStack.clear();
-                    isObstacleExistStack.clear();
                     startGame(keyPressed.getKeyCode());
                 }
                 if(keyPressed.getKeyCode() == KeyEvent.VK_Z) {        // Press Z to Undo
                     undo();
-                    if(!isObstacleExistStack.lastElement()) {
+                    if(!isObstacleExist)
                         isObstacleExist = true;
-                        isObstacleExistStack.push(isObstacleExist);
-                    }
-                    else{
-                        isObstacleExist = false;
-                        isObstacleExistStack.push(isObstacleExist);
-                    }
                 }
                 if (!canMove())
                     isLost = true;
@@ -103,7 +95,7 @@ public class Game2048 extends JPanel {
         if(!playWithMovableObstacle & !playWithFixedObstacle)
             startGame(65);  //Start game in Normal Mode
         if(playWithMovableObstacle && !playWithFixedObstacle)
-        startGame(KeyEvent.VK_B);
+            startGame(KeyEvent.VK_B);
         if(playWithFixedObstacle && !playWithMovableObstacle)
             startGame(KeyEvent.VK_C);
 
@@ -114,8 +106,6 @@ public class Game2048 extends JPanel {
             GameTiles = boardStack.pop();
         if(!scoreStack.isEmpty())
             myScore = scoreStack.pop();
-        if(!isObstacleExistStack.isEmpty())
-            isObstacleExist = isObstacleExistStack.pop();
     }
 
     public void startGame(int keyEventCode) {
@@ -186,7 +176,6 @@ public class Game2048 extends JPanel {
                 boardStack.pop();
             }
             moveObstacle.add();
-            isObstacleExistStack.push(isObstacleExist);
         }
     }
 

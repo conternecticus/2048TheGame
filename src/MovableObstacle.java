@@ -21,7 +21,6 @@ public class MovableObstacle {
                 emptyTime.setValue(Game2048.BOSSHEALTH);
             }
             Game2048.isObstacleExist = true;
-
         }
     }
 
@@ -32,7 +31,6 @@ public class MovableObstacle {
                     Game2048.GameTiles[i].setValue(Game2048.GameTiles[i].getValue() + 1);   // increment negative value of obstacle till 0 is attained
                     if(Game2048.GameTiles[i].getValue() == 0) {
                         Game2048.isObstacleExist = false;
-                        Game2048.isObstacleExistStack.push(Game2048.isObstacleExist);
                     }
                 }
             }

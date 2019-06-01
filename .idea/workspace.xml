@@ -165,7 +165,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559026803335" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559356355627" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
@@ -183,7 +183,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Game2048">
+  <component name="RunManager" selected="Application.Menu">
     <configuration name="Game2048" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.dsa.project.Game2048" />
       <module name="2048TheGame" />
@@ -223,13 +223,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Menu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Menu" />
+      <module name="2048TheGame" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Game2048" />
       <item itemvalue="Application.JPanelExample" />
       <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Menu" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Menu" />
         <item itemvalue="Application.Game2048" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.JPanelExample" />

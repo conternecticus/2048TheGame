@@ -15,7 +15,7 @@ public class Game2048 extends JPanel {
     private static final int TILE_SIZE = 100;
     private static final int TILES_MARGIN = 15;
 
-    public static boolean isObstacleExist = false;
+    public static boolean isObstacleExist;
     private boolean playWithMovableObstacle;
     private MovableObstacle moveObstacle = new MovableObstacle();
     private FixedObstacle fixedObstacle = new FixedObstacle();
@@ -23,6 +23,7 @@ public class Game2048 extends JPanel {
 
     private Stack<Tile[]> boardStack = new Stack<Tile[]>();
     private Stack<Integer> scoreStack = new Stack<Integer>();
+    public static Stack<Boolean> isObstacleExistStack = new Stack<Boolean>();
 
     public static Tile[] GameTiles;
     public static boolean isWon = false;
@@ -38,10 +39,9 @@ public class Game2048 extends JPanel {
     private Image Hieu = ImageIO.read(ResourceLoader.load("James.jpg"));
     private Image Khanh = ImageIO.read(ResourceLoader.load("Ray.jpg"));
     private Image Mint = ImageIO.read(ResourceLoader.load("Mint.jpg"));
-    private static JButton undo;
 
 
-    public Game2048(boolean playWithMovableObstacle) throws IOException {
+    public Game2048(boolean playWithMovableObstacle, boolean playWithFixedObstacle) throws IOException {
         this.playWithMovableObstacle = playWithMovableObstacle;
 
         setFocusable(true);                 // To ensure that keyboard focus is available, so keyboard events are fired
@@ -51,12 +51,21 @@ public class Game2048 extends JPanel {
                 if(keyPressed.getKeyCode() == KeyEvent.VK_A ||
                         keyPressed.getKeyCode() == KeyEvent.VK_B ||
                         keyPressed.getKeyCode() == KeyEvent.VK_C ) {
+                    scoreStack.clear();
+                    boardStack.clear();
+                    isObstacleExistStack.clear();
                     startGame(keyPressed.getKeyCode());
                 }
                 if(keyPressed.getKeyCode() == KeyEvent.VK_Z) {        // Press Z to Undo
                     undo();
-                    if(!isObstacleExist)
+                    if(!isObstacleExistStack.lastElement()) {
                         isObstacleExist = true;
+                        isObstacleExistStack.push(isObstacleExist);
+                    }
+                    else{
+                        isObstacleExist = false;
+                        isObstacleExistStack.push(isObstacleExist);
+                    }
                 }
                 if (!canMove())
                     isLost = true;
@@ -91,7 +100,13 @@ public class Game2048 extends JPanel {
                 repaint();      //To refresh the viewing area when wanting the game to be reset
             }   //End of overridden keyPress method
         });
-        startGame(65);  //Start game in Normal Mode
+        if(!playWithMovableObstacle & !playWithFixedObstacle)
+            startGame(65);  //Start game in Normal Mode
+        if(playWithMovableObstacle && !playWithFixedObstacle)
+        startGame(KeyEvent.VK_B);
+        if(playWithFixedObstacle && !playWithMovableObstacle)
+            startGame(KeyEvent.VK_C);
+
     }
 
     public void undo(){
@@ -99,6 +114,8 @@ public class Game2048 extends JPanel {
             GameTiles = boardStack.pop();
         if(!scoreStack.isEmpty())
             myScore = scoreStack.pop();
+        if(!isObstacleExistStack.isEmpty())
+            isObstacleExist = isObstacleExistStack.pop();
     }
 
     public void startGame(int keyEventCode) {
@@ -111,6 +128,7 @@ public class Game2048 extends JPanel {
         }
         addTile();  //spawn 2 random tiles
         addTile();
+
         if (keyEventCode == KeyEvent.VK_B) { //if user press B, play with movable Obstacle
             playWithMovableObstacle = true;
             isObstacleExist = false;
@@ -127,6 +145,7 @@ public class Game2048 extends JPanel {
 
     private void left() {
         boolean needAddTile = false;
+        boolean needUpdate = false;
 
         if(!playWithMovableObstacle)            // playWithMovableObstacle is false means user is play in with mode A or C, then tiles are moved and merged in the same way for Normal mode and Fixed Obstacle mode
         {
@@ -137,9 +156,15 @@ public class Game2048 extends JPanel {
                 if (!needAddTile && !compare(line, merged)) {
                     needAddTile = true;
                 }
+                if(!needUpdate && !compare(line, merged))
+                    needUpdate = true;
             }
             if(needAddTile)
                 addTile();
+            if(!needUpdate){
+                scoreStack.pop();
+                boardStack.pop();
+            }
         }
         else {                               // if player use to play with mode B, Movable Obstacle
             for (int i = 0; i < 4; i++) {       //move all 4 lines
@@ -149,12 +174,19 @@ public class Game2048 extends JPanel {
                 if (!needAddTile && !compare(line, merged)) {
                     needAddTile = true;
                 }
+                if(!needUpdate && !compare(line, merged))
+                    needUpdate = true;
             }
             if(needAddTile) {
                 addTile();
                 moveObstacle.killObstacle();
             }
+            if(!needUpdate){
+                scoreStack.pop();
+                boardStack.pop();
+            }
             moveObstacle.add();
+            isObstacleExistStack.push(isObstacleExist);
         }
     }
 

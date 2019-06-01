@@ -16,51 +16,89 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1401489774">
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="542" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="542" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Game2048.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="6" column="27" lean-forward="true" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-              <folding>
-                <element signature="e#1003#1011#0" expanded="true" />
-                <element signature="e#1064#1073#0" expanded="true" />
-                <element signature="e#1699#3930#0" expanded="true" />
-                <element signature="e#3929#3930#0" expanded="true" />
-                <element signature="e#6002#6003#0" expanded="true" />
-                <element signature="e#6074#6075#0" expanded="true" />
-                <element signature="e#8132#8133#0" expanded="true" />
-                <element signature="e#8175#8176#0" expanded="true" />
-                <element signature="e#8871#8877#0" expanded="true" />
-                <element signature="e#9107#9108#0" expanded="true" />
-                <element signature="e#9158#9159#0" expanded="true" />
-                <element signature="e#10840#11041#0" expanded="true" />
-                <element signature="e#11040#11041#0" expanded="true" />
-                <element signature="e#14558#14559#0" expanded="true" />
-                <element signature="e#14628#14629#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/dsa/project/MovableObstacle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="24" selection-start-column="24" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Tile.java">
+        <entry file="file://$PROJECT_DIR$/src/Game2048.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="476">
+              <caret line="77" column="24" lean-forward="true" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
+              <folding>
+                <element signature="e#843#851#0" expanded="true" />
+                <element signature="e#904#913#0" expanded="true" />
+                <element signature="e#976#985#0" expanded="true" />
+                <element signature="e#2200#4724#0" expanded="true" />
+                <element signature="e#4723#4724#0" expanded="true" />
+                <element signature="e#9622#9623#0" expanded="true" />
+                <element signature="e#9665#9666#0" expanded="true" />
+                <element signature="e#10640#10641#0" expanded="true" />
+                <element signature="e#10691#10692#0" expanded="true" />
+                <element signature="e#11614#11615#0" expanded="true" />
+                <element signature="e#11678#11679#0" expanded="true" />
+                <element signature="e#12393#12594#0" expanded="true" />
+                <element signature="e#12593#12594#0" expanded="true" />
+                <element signature="e#16469#16470#0" expanded="true" />
+                <element signature="e#16539#16540#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ResourceLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MovableObstacle.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="34" column="85" selection-start-line="34" selection-start-column="85" selection-end-line="34" selection-end-column="85" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Menu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="69" column="53" selection-start-line="69" selection-start-column="53" selection-end-line="69" selection-end-column="53" />
+              <folding>
+                <element signature="e#1077#1558#0" expanded="true" />
+                <element signature="e#1557#1558#0" expanded="true" />
+                <element signature="e#1611#2146#0" expanded="true" />
+                <element signature="e#2145#2146#0" expanded="true" />
+                <element signature="e#2194#2675#0" expanded="true" />
+                <element signature="e#2674#2675#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,12 +160,15 @@
         <option value="$PROJECT_DIR$/src/com/dsa/project/MovableObstacle.java" />
         <option value="$PROJECT_DIR$/src/com/dsa/project/Tile.java" />
         <option value="$PROJECT_DIR$/src/com/dsa/project/Game2048.java" />
+        <option value="$PROJECT_DIR$/src/Menu.java" />
+        <option value="$PROJECT_DIR$/src/MovableObstacle.java" />
+        <option value="$PROJECT_DIR$/src/Game2048.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="790" />
-    <option name="width" value="585" />
+    <option name="x" value="676" />
+    <option name="width" value="697" />
     <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -136,6 +177,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -152,14 +195,12 @@
               <item name="2048TheGame" type="b2602c69:ProjectViewProjectNode" />
               <item name="2048TheGame" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="Menu" type="e9f4de52:FormNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -375,10 +416,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2181208" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.44461304" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -387,7 +428,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
-      <window_info anchor="bottom" id="Messages" order="2" weight="0.32786885" />
+      <window_info anchor="bottom" id="Messages" order="2" weight="0.33114755" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32941177" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
@@ -397,7 +438,7 @@
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32941177" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.04411765" />
-      <window_info anchor="bottom" id="Run" order="12" weight="0.04411765" />
+      <window_info active="true" anchor="bottom" id="Run" order="12" visible="true" weight="0.040983606" />
       <window_info anchor="right" id="Maven" order="0" />
       <window_info anchor="right" id="Database" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
@@ -438,20 +479,6 @@
         </entry>
       </map>
     </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list />
-          </value>
-        </entry>
-        <entry key="User">
-          <value>
-            <list />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed a minor bug in Game2048.java" />
@@ -471,62 +498,60 @@
     <entry file="file://$PROJECT_DIR$/../SpecialArrayApp.java" />
     <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/java.base/java/util/Stack.java" />
     <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/java.base/java/util/Vector.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/FixedObstacle.java">
+    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/FixedObstacle.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/MovableObstacle.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Tile.java" />
+    <entry file="file://$PROJECT_DIR$/../../2048TheGame/src/com/dsa/project/Game2048.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Game2048.java" />
+    <entry file="file://$PROJECT_DIR$/src/ResourceLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+        <state relative-caret-position="34">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MovableObstacle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="34" column="85" selection-start-line="34" selection-start-column="85" selection-end-line="34" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="69" column="53" selection-start-line="69" selection-start-column="53" selection-end-line="69" selection-end-column="53" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#moveLineFixedObstacle#0;class#FixedObstacle#0" />
-            <element signature="method#mergeLineFixedObstacle#0;class#FixedObstacle#0" />
+            <element signature="e#1077#1558#0" expanded="true" />
+            <element signature="e#1557#1558#0" expanded="true" />
+            <element signature="e#1611#2146#0" expanded="true" />
+            <element signature="e#2145#2146#0" expanded="true" />
+            <element signature="e#2194#2675#0" expanded="true" />
+            <element signature="e#2674#2675#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/MovableObstacle.java">
+    <entry file="file://$PROJECT_DIR$/src/Game2048.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="24" selection-start-column="24" selection-end-column="24" />
+        <state relative-caret-position="476">
+          <caret line="77" column="24" lean-forward="true" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Tile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../2048TheGame/src/com/dsa/project/Game2048.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="115" column="12" selection-start-line="115" selection-start-column="12" selection-end-line="115" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/dsa/project/Game2048.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" column="27" lean-forward="true" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-          <folding>
-            <element signature="e#1003#1011#0" expanded="true" />
-            <element signature="e#1064#1073#0" expanded="true" />
-            <element signature="e#1699#3930#0" expanded="true" />
-            <element signature="e#3929#3930#0" expanded="true" />
-            <element signature="e#6002#6003#0" expanded="true" />
-            <element signature="e#6074#6075#0" expanded="true" />
-            <element signature="e#8132#8133#0" expanded="true" />
-            <element signature="e#8175#8176#0" expanded="true" />
-            <element signature="e#8871#8877#0" expanded="true" />
-            <element signature="e#9107#9108#0" expanded="true" />
-            <element signature="e#9158#9159#0" expanded="true" />
-            <element signature="e#10840#11041#0" expanded="true" />
-            <element signature="e#11040#11041#0" expanded="true" />
-            <element signature="e#14558#14559#0" expanded="true" />
-            <element signature="e#14628#14629#0" expanded="true" />
+            <element signature="e#843#851#0" expanded="true" />
+            <element signature="e#904#913#0" expanded="true" />
+            <element signature="e#976#985#0" expanded="true" />
+            <element signature="e#2200#4724#0" expanded="true" />
+            <element signature="e#4723#4724#0" expanded="true" />
+            <element signature="e#9622#9623#0" expanded="true" />
+            <element signature="e#9665#9666#0" expanded="true" />
+            <element signature="e#10640#10641#0" expanded="true" />
+            <element signature="e#10691#10692#0" expanded="true" />
+            <element signature="e#11614#11615#0" expanded="true" />
+            <element signature="e#11678#11679#0" expanded="true" />
+            <element signature="e#12393#12594#0" expanded="true" />
+            <element signature="e#12593#12594#0" expanded="true" />
+            <element signature="e#16469#16470#0" expanded="true" />
+            <element signature="e#16539#16540#0" expanded="true" />
           </folding>
         </state>
       </provider>

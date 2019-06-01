@@ -31,7 +31,7 @@ public class Menu {
                     if (logic != null) {
                         game.remove(logic);
                     }
-                    logic = new Game2048(false);
+                    logic = new Game2048(false, true);
                     game.add(logic);
                     game.setVisible(true);
                 } catch (IOException err) {
@@ -49,7 +49,7 @@ public class Menu {
                         game.remove(logic);
                     }
 
-                    logic = new Game2048(true);
+                    logic = new Game2048(true, false);
                     Game2048.isObstacleExist = false;
                     game.add(logic);
                     game.setVisible(true);
@@ -67,7 +67,7 @@ public class Menu {
                     if (logic != null) {
                         game.remove(logic);
                     }
-                    logic = new Game2048(false);
+                    logic = new Game2048(false, false);
                     game.add(logic);
                     game.setVisible(true);
                 } catch (IOException err) {

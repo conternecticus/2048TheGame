@@ -55,9 +55,14 @@ public class Game2048 extends JPanel {
                     startGame(keyPressed.getKeyCode());
                 }
                 if(keyPressed.getKeyCode() == KeyEvent.VK_Z) {        // Press Z to Undo
+                    for(int i = 0; i <16; i++){ //This condition fixes a bug in mode B
+                        if(GameTiles[i].getValue() == -5)
+                            isObstacleExist = false;
+                        if(GameTiles[i].getValue() == -4 || GameTiles[i].getValue() == -3 ||
+                                GameTiles[i].getValue() == -2 || GameTiles[i].getValue() == -1)
+                            isObstacleExist = true;
+                    }
                     undo();
-                    if(!isObstacleExist)
-                        isObstacleExist = true;
                 }
                 if (!canMove())
                     isLost = true;

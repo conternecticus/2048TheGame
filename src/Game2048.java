@@ -361,14 +361,20 @@ public class Game2048 extends JPanel {
             }
         }
         else {
-            // draw 2048 box
-            g.setColor(new Color(0x1D1D1D));                        //2048 box to anti-alias
-            g.fillRect(20, 3, 150, 70);
+            // draw boxes
+            g.setColor(new Color(0x1D1D1D));
+            g.fillRect(20, 3, 150, 70);         //"2048 box" to anti-alias
+            g.fillRect(30, 70, 400, 30);        //"press Z" box to anti-alias
 
             // draw 2048
             g.setColor(new Color(0x79c4b4));
             g.setFont(new Font(FONT_NAME, Font.BOLD, 60));
             g.drawString("2048", 30, 65);
+
+            // "Press Z to undo"
+            g.setColor(new Color(0x8ed2ff));
+            g.setFont(new Font(FONT_NAME, Font.BOLD, 20));
+            g.drawString("Press Z to undo. A, B, C to choose mode", 30, 100);
 
             // draw text in tiles
             g.setColor(new Color(0xeaeaea));

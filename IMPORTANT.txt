@@ -1,1 +1,0 @@
-Right Click on "resources" folder and choose "Mark Directory as" and choose "Sources Root" 

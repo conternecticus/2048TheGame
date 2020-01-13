@@ -1,0 +1,2 @@
+If you want to compile and run the game in IntelliJ, here's how to do it:
+Right Click on "resources" folder and choose "Mark Directory as" and choose "Sources Root".
